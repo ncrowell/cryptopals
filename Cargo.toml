@@ -1,0 +1,5 @@
+[package]
+
+name = "matasano"
+version = "0.0.1"
+authors = ["Nicolas Crowell <nicolas.crowell@gmail.com>"]
