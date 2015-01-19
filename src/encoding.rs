@@ -99,40 +99,38 @@ pub mod b64 {
     }
 
 }
+#[cfg(test)]
+mod test {
+    use super::*;
 
-static HEX_STRING: &'static str = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
-static B64_STRING: &'static str = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
+    static HEX_STRING: &'static str = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
+    static B64_STRING: &'static str = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
 
-#[test]
-fn matasano_hex_to_b64_test() {
-    let bytes: Vec<u8> = hex::decode(HEX_STRING);
-    print!("Decoded hex: {:?}\n", bytes);
-    let b64: String = b64::encode(bytes.as_slice());
-    print!("Converted to b64: {:?}\n", b64);
-    //let b64s: &str = b64.as_slice()
-    assert!(b64.as_slice() == B64_STRING);
-}
+    #[test]
+    pub fn matasano_hex_to_b64_test() {
+        let bytes: Vec<u8> = hex::decode(HEX_STRING);
+        let b64: String = b64::encode(bytes.as_slice());
+        assert!(b64.as_slice() == B64_STRING);
+    }
 
-#[test]
-fn matasano_b64_to_hex_test() {
-    let bytes: Vec<u8> = b64::decode(B64_STRING);
-    let hex: String = hex::encode(&*bytes);
-    //let b64s: &str = b64.as_slice()
-    assert!(hex.as_slice() == HEX_STRING);
-}
+    #[test]
+    pub fn matasano_b64_to_hex_test() {
+        let bytes: Vec<u8> = b64::decode(B64_STRING);
+        let hex: String = hex::encode(&*bytes);
+        assert!(hex.as_slice() == HEX_STRING);
+    }
 
-#[test]
-fn wiki_b64_encode_test() {
-    let s: &str = "Man";
-    let encode = b64::encode(s.as_bytes());
-    print!("Encode is {:?}\n", encode);
-    assert!(encode == "TWFu");
-}
+    #[test]
+    pub fn wiki_b64_encode_test() {
+        let s: &str = "Man";
+        let encode = b64::encode(s.as_bytes());
+        assert!(encode == "TWFu");
+    }
 
-#[test]
-fn wiki_b64_decode_test() {
-    let s = "TWFu";
-    let decode = b64::decode(s);
-    print!("Decode is {:?}\n", decode);
-    assert!(decode.as_slice() == "Man".as_bytes());
+    #[test]
+    pub fn wiki_b64_decode_test() {
+        let s = "TWFu";
+        let decode = b64::decode(s);
+        assert!(decode.as_slice() == "Man".as_bytes());
+    }
 }
