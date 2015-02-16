@@ -17,7 +17,6 @@ pub fn xor_with_byte(buf: &[u8], b: u8) -> Vec<u8> {
 
 #[allow(unused_imports)]
 #[allow(dead_code)]
-#[allow(unstable)]
 mod test {
     use encoding::hex::decode;
     use super::*;
@@ -28,7 +27,7 @@ mod test {
         let b = decode("686974207468652062756c6c277320657965");
         let out = decode("746865206b696420646f6e277420706c6179");
 
-        assert!(xor(a.as_slice(), b.as_slice()) == out);
+        assert!(xor(&a[], &b[]) == out);
     }
 
     #[test]
@@ -39,12 +38,5 @@ mod test {
         assert!(xor_with_byte(&top4bits, 31) == [239, 239]);
     }
 
-    #[test]
-    fn decode_xor_test() {
-        let a = decode("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736");
-        for x in 0..255 {
-            println!("{:?} : {:?}", x as u8, String::from_utf8(xor_with_byte(a.as_slice(), x as u8)));
-        }
-    }
 }
 
